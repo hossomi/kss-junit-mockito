@@ -1,7 +1,9 @@
 package hossomi.kss.junitmockito.user;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class User {
 
@@ -25,6 +29,6 @@ public class User {
     @Column(nullable = false)
     private Integer age;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String accountId;
 }

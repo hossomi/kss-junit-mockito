@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Optional;
 
 @Slf4j
 @Service
@@ -20,34 +19,26 @@ public class AccountClient {
 
     @Transactional
     public Account addCredit(String accountId, double value) {
-        try {
-            log.info("Adding [{}] to account [{}]", value, accountId);
-            // Simulate network delay
-            Thread.sleep(500);
+        log.info("[ACCOUNTS] >> POST /accounts/{} : {}", accountId, value);
 
-            Account account = accounts.findById(accountId)
-                    .orElseGet(() -> new Account(accountId, 0.0));
-            account.setBalance(account.getBalance() + value);
+        Account account = accounts.findById(accountId)
+                .orElseGet(() -> new Account(accountId, 0.0));
+        account.setBalance(account.getBalance() + value);
 
-            accounts.save(account);
-            return account;
-        }
-        catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        accounts.save(account);
+
+        log.info("[ACCOUNTS] << [200] POST /accounts/{} : {}", accountId, account);
+        return account;
     }
 
     @Transactional
-    public Optional<Account> getAccount(String accountId) {
-        try {
-            log.info("Getting account [{}] balance", accountId);
-            // Simulate network delay
-            Thread.sleep(500);
+    public Account getAccount(String accountId) {
+        log.info("[ACCOUNTS] >> GET /accounts/{}", accountId);
 
-            return accounts.findById(accountId);
-        }
-        catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Account account = accounts.findById(accountId)
+                .orElseGet(() -> new Account(accountId, 0.0));
+
+        log.info("[ACCOUNTS] << GET /accounts/{} : {}", accountId, account);
+        return account;
     }
 }
