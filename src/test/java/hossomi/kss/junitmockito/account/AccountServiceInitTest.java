@@ -4,6 +4,9 @@ import hossomi.kss.junitmockito.user.User;
 import hossomi.kss.junitmockito.user.UserService;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 
 import java.util.Optional;
 
@@ -13,17 +16,20 @@ import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-public class AccountServiceTest {
+public class AccountServiceInitTest {
 
+    @Mock
     private UserService userService;
+
+    @Mock
     private AccountClient accountClient;
+
+    @InjectMocks
     private AccountService accountService;
 
     @Before
     public void setup() {
-        userService = mock(UserService.class);
-        accountClient = mock(AccountClient.class);
-        accountService = new AccountService(userService, accountClient);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test

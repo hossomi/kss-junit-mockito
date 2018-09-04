@@ -2,8 +2,11 @@ package hossomi.kss.junitmockito.account;
 
 import hossomi.kss.junitmockito.user.User;
 import hossomi.kss.junitmockito.user.UserService;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
@@ -13,18 +16,17 @@ import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-public class AccountServiceTest {
+@RunWith(MockitoJUnitRunner.class)
+public class AccountServiceRunnerTest {
 
+    @Mock
     private UserService userService;
-    private AccountClient accountClient;
-    private AccountService accountService;
 
-    @Before
-    public void setup() {
-        userService = mock(UserService.class);
-        accountClient = mock(AccountClient.class);
-        accountService = new AccountService(userService, accountClient);
-    }
+    @Mock
+    private AccountClient accountClient;
+
+    @InjectMocks
+    private AccountService accountService;
 
     @Test
     public void testAddCreditToExistingAccount() {
