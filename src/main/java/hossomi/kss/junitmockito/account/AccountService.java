@@ -18,8 +18,13 @@ public class AccountService {
         this.accounts = payments;
     }
 
-    public Optional<Account> addToUserAccount(Long userId, double value) {
+    public Optional<Account> addCreditToUserAccount(Long userId, double value) {
         return users.get(userId)
-                .map(user -> accounts.add(user.getAccountId(), value));
+                .map(user -> accounts.addCredit(user.getAccountId(), value));
+    }
+
+    public Optional<Account> getUserAccount(Long userId) {
+        return users.get(userId)
+                .flatMap(user -> accounts.getAccount(user.getAccountId()));
     }
 }

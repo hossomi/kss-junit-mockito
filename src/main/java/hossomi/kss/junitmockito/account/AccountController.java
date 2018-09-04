@@ -2,10 +2,7 @@ package hossomi.kss.junitmockito.account;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.ResponseEntity.notFound;
 
@@ -24,7 +21,16 @@ public class AccountController {
             @PathVariable("userId") Long userId,
             @RequestBody Double value) {
 
-        return accounts.addToUserAccount(userId, value)
+        return accounts.addCreditToUserAccount(userId, value)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> notFound().build());
+    }
+
+    @GetMapping
+    public ResponseEntity<Account> get(
+            @PathVariable("userId") Long userId) {
+
+        return accounts.getUserAccount(userId)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> notFound().build());
     }
