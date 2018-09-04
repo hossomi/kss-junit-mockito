@@ -70,4 +70,14 @@ public class MockitoSampleTest {
         System.out.println(service.speak("Jeff"));
     }
 
+    @Test
+    public void shouldMockLongNames() {
+        doReturn("Hello you!")
+                .when(service)
+                .speak(argThat(name -> name.length() > 10));
+
+        System.out.println(service.speak("Venkatanarasimharajuvaripeta"));
+        System.out.println(service.speak("Hossomi"));
+    }
+
 }
