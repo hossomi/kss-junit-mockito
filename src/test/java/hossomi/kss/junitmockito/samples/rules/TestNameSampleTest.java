@@ -1,14 +1,14 @@
 package hossomi.kss.junitmockito.samples.rules;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Slf4j
 public class TestNameSampleTest {
-
-    private Logger log = LoggerFactory.getLogger(getClass());
 
     @Rule
     public TestName testName = new TestName();

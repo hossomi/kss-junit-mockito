@@ -1,16 +1,14 @@
 package hossomi.kss.junitmockito.samples.rules;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.Timeout;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
+@Slf4j
 public class TimeoutRuleSampleTest {
-
-    private Logger log = LoggerFactory.getLogger(getClass());
 
     @Rule
     public Timeout timeout = new Timeout(1000, MILLISECONDS);
@@ -22,7 +20,7 @@ public class TimeoutRuleSampleTest {
 
     @Test
     public void shouldNotCrashAfterWindowsUpdate() throws InterruptedException {
-        log.info("Windows is updating...");
-        Thread.sleep(1000000);
+        log.info("Waiting for Windows update...");
+        Thread.sleep(Long.MAX_VALUE);
     }
 }

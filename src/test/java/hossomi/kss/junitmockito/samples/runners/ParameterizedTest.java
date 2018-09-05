@@ -1,6 +1,6 @@
 package hossomi.kss.junitmockito.samples.runners;
 
-import hossomi.kss.junitmockito.samples.rules.LogRule;
+import hossomi.kss.junitmockito.samples.rules.TestWatcherSampleTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +19,7 @@ public class ParameterizedTest {
     private Logger log = LoggerFactory.getLogger(getClass());
 
     @Rule
-    public LogRule logrule = new LogRule(getClass());
+    public TestWatcherSampleTest.LogRule logrule = new TestWatcherSampleTest.LogRule(getClass());
 
     private final String string;
     private final int integer;
