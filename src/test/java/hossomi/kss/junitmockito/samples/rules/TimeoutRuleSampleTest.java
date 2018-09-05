@@ -19,8 +19,16 @@ public class TimeoutRuleSampleTest {
     }
 
     @Test
-    public void shouldNotCrashAfterWindowsUpdate() throws InterruptedException {
-        log.info("Waiting for Windows update...");
+    public void shouldCrashWaitingForWindowsUpdate() throws InterruptedException {
+        log.info("Updating Windows...");
+        updateWindows();
+    }
+
+    // ----------------------------------------
+
+    private static void updateWindows() throws InterruptedException {
+        Thread.sleep(Long.MAX_VALUE);
+        Thread.sleep(Long.MAX_VALUE);
         Thread.sleep(Long.MAX_VALUE);
     }
 }

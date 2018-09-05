@@ -23,6 +23,8 @@ public class TestNameSampleTest {
         log.info("Test {} ID: {}", testName.getMethodName(), hash());
     }
 
+    // ----------------------------------------
+
     private String hash() {
         String base = testName.getMethodName() + getClass().getName();
         return String.valueOf(Math.abs(base.hashCode()));

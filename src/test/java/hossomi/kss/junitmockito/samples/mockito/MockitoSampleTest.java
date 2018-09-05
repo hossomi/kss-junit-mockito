@@ -1,10 +1,12 @@
 package hossomi.kss.junitmockito.samples.mockito;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
+@Slf4j
 public class MockitoSampleTest {
 
     public static class Service {
@@ -21,7 +23,7 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(any());
 
-        System.out.println(service.speak("Hossomi"));
+        log.info("{}", service.speak("Hossomi"));
     }
 
     @Test
@@ -30,7 +32,7 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(any());
 
-        System.out.println(service.speak("Hossomi"));
+        log.info("{}", service.speak("Hossomi"));
     }
 
     @Test
@@ -39,7 +41,7 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(any());
 
-        System.out.println(service.speak("Hossomi"));
+        log.info("{}", service.speak("Hossomi"));
     }
 
     @Test
@@ -48,7 +50,7 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(any());
 
-        System.out.println(service.speak("Hossomi"));
+        log.info("{}", service.speak("Hossomi"));
     }
 
     @Test
@@ -57,7 +59,7 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(any());
 
-        System.out.println(service.speak("Hossomi"));
+        log.info("{}", service.speak("Hossomi"));
     }
 
     @Test
@@ -66,8 +68,8 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(eq("Hossomi"));
 
-        System.out.println(service.speak("Hossomi"));
-        System.out.println(service.speak("Jeff"));
+        log.info("{}", service.speak("Hossomi"));
+        log.info("{}", service.speak("Jeff"));
     }
 
     @Test
@@ -76,8 +78,22 @@ public class MockitoSampleTest {
                 .when(service)
                 .speak(argThat(name -> name.length() > 10));
 
-        System.out.println(service.speak("Venkatanarasimharajuvaripeta"));
-        System.out.println(service.speak("Hossomi"));
+        log.info("{}", service.speak("Venkatanarasimharajuvaripeta"));
+        log.info("{}", service.speak("Hossomi"));
+    }
+
+    @Test
+    public void shouldVerify() {
+        doReturn("Hello world!")
+                .when(service)
+                .speak(eq("Hossomi"));
+
+        log.info(service.speak("Hossomi"));
+        log.info(service.speak("Jeff"));
+
+        verify(service).speak(eq("Hossomi"));
+        verify(service, times(2)).speak(any());
+        verify(service, never()).speak(eq("Marcelo"));
     }
 
 }

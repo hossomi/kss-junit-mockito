@@ -5,6 +5,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static java.util.Objects.requireNonNull;
+
 @Slf4j
 public class ExpectedExceptionSampleTest {
 
@@ -18,20 +20,17 @@ public class ExpectedExceptionSampleTest {
 
     @Test
     public void shouldThrowButNotCrash() throws Exception {
-        exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("Bleargh");
+        exception.expect(NullPointerException.class);
+        exception.expectMessage("surely null");
 
-        log.info("Throwing up...");
-        Exception up = new IllegalArgumentException("Bleargh");
-        throw up; // classic
+        requireNonNull(null, "surely null");
     }
 
     @Test
     public void shouldThrowAndCrash() {
-        exception.expect(IllegalArgumentException.class);
-        exception.expectMessage("Bleargh");
+        exception.expect(NullPointerException.class);
+        exception.expectMessage("maybe null");
 
-        log.info("Throwing... Down?");
-        throw new IllegalArgumentException("Never gonna let you");
+        requireNonNull(null, "surely null");
     }
 }
